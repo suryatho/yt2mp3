@@ -1,14 +1,15 @@
 [project]
-name = "yt2mp3"
+name = "spotifytool"
 version = "0.1.0"
-description = "YouTube to MP3 downloader CLI"
+description = "Spotify and SoundCloud downloader CLI"
 dependencies = [
     "typer[all]",
     "yt-dlp",
     "fastapi",
     "uvicorn",
+    "scdl"
 ]
 
 [project.scripts]
-yt2mp3 = "core.cli:app"
-yt2mp3-server = "core.server:start_server"
+spotifytool = "core.cli:app"
+spotifytool-server = "core.server:start_server"

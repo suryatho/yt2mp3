@@ -1,9 +1,9 @@
 #!/bin/bash
-# filepath: /Users/surya/Developer/yt2mp3/setup_dev.sh
+# filepath: /Users/surya/Developer/spotifytool/setup_dev.sh
 
 set -e
 
-echo "🚀 Setting up YT2MP3 development environment..."
+echo "🚀 Setting up SpotifyTool development environment..."
 
 # Create venv if it doesn't exist
 if [ ! -d "venv" ]; then
@@ -21,5 +21,5 @@ pip install -e .
 
 echo "✅ Development environment ready!"
 echo "To activate: source venv/bin/activate"
-echo "To run the server: python -m core.server"
-echo "To run the CLI: python -m core.cli"
+echo "To run the server: python3 -m core.server"
+echo "To run the CLI: python3 -m core.cli"

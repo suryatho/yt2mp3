@@ -1,10 +1,10 @@
 {
   "manifest_version": 3,
-  "name": "YT2MP3 Extension",
+  "name": "Spotify Tool Extension",
   "version": "6.7",
-  "description": "Gimme music",
-  "permissions": ["nativeMessaging", "activeTab", "scripting"],
-  "host_permissions": ["*://*.youtube.com/*", "http://127.0.0.1:5000/*"],
+  "description": "Download music from YouTube and SoundCloud to your Spotify library",
+  "permissions": ["nativeMessaging", "activeTab", "scripting", "notifications"],
+  "host_permissions": ["*://*.youtube.com/*", "*://*.soundcloud.com/*", "http://127.0.0.1:5000/*"],
   "background": {
     "service_worker": "background.js"
   },
@@ -12,17 +12,21 @@
     {
       "matches": ["*://www.youtube.com/watch*"],
       "js": ["content.js"]
+    },
+    {
+      "matches": ["*://soundcloud.com/*/*"],
+      "js": ["content-soundcloud.js"]
     }
   ],
   "web_accessible_resources": [
     {
       "resources": ["assets/crocodile.png", "assets/peace.png"],
-      "matches": ["https://*.youtube.com/*"]
+      "matches": ["https://*.youtube.com/*", "https://*.soundcloud.com/*"]
     }
   ],
   "action": {
     "default_popup": "popup/popup.html",
-    "default_title": "YT2MP3 Extension 🤣",
+    "default_title": "Spotify Tool Extension 🎵",
     "default_icon": {
       "16": "assets/crocodile.png",
       "48": "assets/crocodile.png",

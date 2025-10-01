@@ -1,0 +1,156 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #0f0f0f;
+    color: #f1f1f1;
+    font-family: Arial, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    width: 300px;
+}
+
+.container {
+    padding: 16px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    box-sizing: border-box;
+}
+
+input {
+    width: 100%;
+    padding: 8px 12px;
+    margin-bottom: 12px;
+    background: #282828;
+    border: 1px solid #3f3f3f;
+    border-radius: 2px;
+    color: #f1f1f1;
+    outline: none;
+    box-sizing: border-box;
+}
+
+input:focus {
+    border-color: #3da5ff;
+}
+
+button {
+    width: 100%;
+    padding: 8px;
+    background: #3da5ff;
+    color: #0f0f0f;
+    border: none;
+    border-radius: 2px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    box-sizing: border-box;
+}
+
+button:hover {
+    background: #4cb0ff;
+}
+
+button:disabled {
+    background: #717171;
+    cursor: not-allowed;
+}
+
+.status.hidden {
+    display: none;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.status {
+    min-height: 20px;
+    margin: 8px 0;
+    font-size: 13px;
+    color: #aaa;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.downloads-list {
+    margin-top: 16px;
+    border-top: 1px solid #3f3f3f;
+    padding-top: 12px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.download-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #2a2a2a;
+    animation: slideIn 0.3s ease;
+}
+
+.download-item:last-child {
+    border-bottom: none;
+}
+
+.download-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.download-title {
+    display: block;
+    font-size: 12px;
+    color: #f1f1f1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+}
+
+.download-platform {
+    display: block;
+    font-size: 10px;
+    color: #888;
+    margin-top: 2px;
+}
+
+.download-status {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.status-icon {
+    font-size: 12px;
+}
+
+.status-text {
+    font-size: 10px;
+    color: #aaa;
+    min-width: 30px;
+    text-align: right;
+}
+
+.download-item.downloading .status-text {
+    color: #3da5ff;
+}
+
+.download-item.completed .status-text {
+    color: #4CAF50;
+}
+
+.download-item.failed .status-text {
+    color: #f44336;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
