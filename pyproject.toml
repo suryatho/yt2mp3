@@ -1,0 +1,14 @@
+[project]
+name = "yt2mp3"
+version = "0.1.0"
+description = "YouTube to MP3 downloader CLI"
+dependencies = [
+    "typer[all]",
+    "yt-dlp",
+    "fastapi",
+    "uvicorn",
+]
+
+[project.scripts]
+yt2mp3 = "core.cli:app"
+yt2mp3-server = "core.server:start_server"

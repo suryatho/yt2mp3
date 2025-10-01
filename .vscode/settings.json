@@ -1,0 +1,7 @@
+{
+    "mypy-type-checker.disable": true,
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}"
+    ],
+    "python.envFile": "${workspaceFolder}/.env"
+}
