@@ -2,6 +2,7 @@
 # filepath: /Users/surya/Developer/spotifytool/setup_server.sh
 
 set -e  # Exit on error
+set -x
 
 echo "🚀 Setting up SpotifyTool server..."
 
@@ -17,7 +18,7 @@ fi
 # Install package using pipx
 echo "📦 Installing SpotifyTool package..."
 if pipx list | grep -q "spotifytool"; then
-    pipx reinstall .
+    pipx reinstall spotifytool
 else
     pipx install -e .
 fi
@@ -26,19 +27,26 @@ fi
 echo "📝 Creating launch agent..."
 PLIST_PATH="$HOME/Library/LaunchAgents/com.surya.spotifytool-server.plist"
 
-# Get the full path to spotifytool-server
-SPOTIFYTOOL_PATH=$(which spotifytool-server)
+echo "HOME is: $HOME"
+echo "PLIST_PATH is: $PLIST_PATH"
+whoami
+touch "$PLIST_PATH" && echo "Touch succeeded" || echo "Touch failed"
 
 cat > "$PLIST_PATH" << EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>EnvironmentVariables</key>
+    <dict>
+    <key>PATH</key>
+    <string>/Users/surya/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
     <key>Label</key>
     <string>com.surya.spotifytool-server</string>
     <key>ProgramArguments</key>
     <array>
-        <string>$SPOTIFYTOOL_PATH</string>
+        <string>/Users/surya/.local/bin/spotifytool-server</string>
     </array>
     <key>RunAtLoad</key>
     <true/>
@@ -58,13 +66,6 @@ launchctl unload "$PLIST_PATH" 2>/dev/null || true
 
 # Load the launch agent
 launchctl load "$PLIST_PATH"
-
-# Remove old native messaging configuration if it exists
-NATIVE_MSG_PATH="$HOME/Library/Application Support/Google/Chrome/NativeMessagingHosts/com.surya.spotifytool.json"
-if [ -f "$NATIVE_MSG_PATH" ]; then
-    echo "🧹 Removing old native messaging configuration..."
-    rm "$NATIVE_MSG_PATH"
-fi
 
 # Wait a moment for the server to start
 echo "⏳ Starting server..."
